@@ -132,18 +132,29 @@ function initialize() {
 'Av. Montreal, 687 A -   Jd. Panorama    -   Sarandi -   Parana',
 'Rua Angelo Perine, 540  -   Pq. São Pedro   -   Sarandi -   Parana'];
 
-  for (var x = 0; x < addresses.length; x++) {
+addresses.forEach(function(each) {
+  // for (var x = 0; x < addresses.length; x++) {
         XHR.get({
-            url:'http://maps.googleapis.com/maps/api/geocode/json?address='+addresses[x]+'&sensor=false'
+            url:'http://maps.googleapis.com/maps/api/geocode/json?address='+each+'&sensor=false'
         }, function(data) {
           var p = data.results[0].geometry.location
           var latlng = new google.maps.LatLng(p.lat, p.lng);
-          new google.maps.Marker({
+
+          var infowindow = new google.maps.InfoWindow({
+            content: each
+          });
+
+          var marker = new google.maps.Marker({
               position: latlng,
               map: map
           });
+
+          google.maps.event.addListener(marker, 'click', function() {
+            infowindow.open(map,marker);
+          });
+
     });
-  }
+  });
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
