@@ -149,7 +149,7 @@ addresses.forEach(function(each) {
               map: map
           });
 
-          google.maps.event.addListener(marker, 'load', function() {
+          google.maps.event.addListener(marker, 'click', function() {
             infowindow.open(map,marker);
           });
 
