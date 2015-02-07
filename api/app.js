@@ -1,43 +1,29 @@
-var express = require('express')
-  , jsdom = require('jsdom')
-  , request = require('request')
-  , url = require('url')
-  , app = express();
+var request = require('request'),
+    cheerio = require('cheerio'),
+    app     = require('express')();
 
-var uri = 'http://src.tccc.com.br/PontosDeRecarga.htm';
-
+const URL = 'http://src.tccc.com.br/PontosDeRecarga.htm';
 
 app.get('/', function(req, res) {
-  request({uri: uri}, function(err, response, body){
-    var self = this;
-    self.items = new Array();
+  request(URL, function (err, resp, body) {
+    if (!err) {
+        var $ = cheerio.load(body);
+        var info = [];
 
-    if (err && res.statusCode !== 200) { console.log('Resquest Error.');};
+        $('tr').map(function (i, links) {
+            var text = $(links).prev();
 
-    jsdom.env({
-      html: body,
-      scripts: ['http://code.jquery.com/jquery-1.6.min.js'],
-      done: function(err, window){
-        var $ = window.jQuery
-          , $body = $('body')
-          , $table = $('table')
-          , $tr = $body.find('table tr');
-
-          $tr.each(function(i, item){
-
-            var $td = $(item).find('td');
-
-            $td.each(function(j, result){
-
-              if (j < 5) {
-
-              };
-              console.log(j + ' - ' + $td.eq(j).text());
+            info.push({
+              address: text.find('td').eq(3).text(),
+              district: text.find('td').eq(1).text(),
+              local: text.find('td').eq(2).text(),
+              city: text.find('td').eq(0).text()
             })
-          })
-      }
-    })
-  })
+        });
+
+    }
+    res.json(info);
+  });
 });
 
 /// catch 404 and forward to error handler
