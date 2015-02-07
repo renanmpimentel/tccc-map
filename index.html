@@ -17,26 +17,16 @@
     <meta property="og:description" content="Site destinado a ajudar a população de Maringá a encontrar pontos de venda e recarga do cartão da TCCC, empresa responsavel pelo transporte coletivo em Maringá-PR.">
 
     <title>Cartão TCCC - Da população para a população</title>
-    <style>
-      html, body{
-        height: 100%;
-        margin: 0px;
-        padding: 0px
-      }
-
-      #map-canvas {
-        height: 95%;
-      }
-
-      #footer {
-        height: 5%;
-        background-color: #000000;
-      }
-    </style>
+    <link rel="stylesheet" type="text/css" href="assets/stylesheet/style.css">
 
   </head>
   <body>
-    <a href="https://github.com/renanmpimentel/tccc-map"><img style="position: absolute; top: 0; right: 0; border: 0; z-index: 999" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+    <div id="social-bar">
+      <a href="#"><img src="assets/images/facebook.png" alt="Facebook"></a>
+      <a href="#"><img src="assets/images/twitter.png" alt="Twitter"></a>
+      <a href="#"><img src="assets/images/git.png" alt="GitHub"></a>
+      <a href="#"><img src="assets/images/contact.png" alt="Contato"></a>
+    </div>
     <div id="map-canvas"></div>
     <div id="footer"></div>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
