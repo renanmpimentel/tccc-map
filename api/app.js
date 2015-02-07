@@ -10,15 +10,18 @@ app.get('/', function(req, res) {
         var $ = cheerio.load(body);
         var info = [];
 
-        $('tr').map(function (i, links) {
+        $('table tr').map(function (i, links) {
             var text = $(links).prev();
 
-            info.push({
-              address: text.find('td').eq(3).text(),
-              district: text.find('td').eq(1).text(),
-              local: text.find('td').eq(2).text(),
-              city: text.find('td').eq(0).text()
-            })
+            // the content init in line 2
+            if (i > 1) {
+              info.push({
+                address: text.find('td').eq(3).text(),
+                district: text.find('td').eq(1).text(),
+                local: text.find('td').eq(2).text(),
+                city: text.find('td').eq(0).text()
+              })
+            };
         });
 
     }
@@ -34,9 +37,3 @@ app.use(function(req, res, next) {
 });
 
 module.exports = app;
-
-var env = app.get('env') == 'development' ? 'dev' : app.get('env');
-var port = process.env.PORT || 8000;
-
-app.listen(port);
-console.log('Magic happens on port ' + port);
