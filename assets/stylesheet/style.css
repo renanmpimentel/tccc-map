@@ -16,10 +16,5 @@ html, body{
 }
 
 #map-canvas {
-  height: 95%;
-}
-
-#footer {
-  height: 5%;
-  background-color: #000000;
+  height: 100%;
 }
