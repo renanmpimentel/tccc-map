@@ -18,11 +18,10 @@ app.get('/', function(req, res) {
             // the content init in line 2
             if (i > 1) {
               info.push({
-                address: text.find('td').eq(3).text() + ' - ' + text.find('td').eq(1).text() + ' - ' + text.find('td').eq(0).text(),
-                // district: text.find('td').eq(1).text(),
+                address: text.find('td').eq(3).text() + ' - ' + text.find('td').eq(1).text() + ', ' + text.find('td').eq(0).text() + '- Paraná',
                 phone: text.find('td').eq(4).text(),
+                link: text.find('td').eq(5).find('a').attr('href'),
                 local: text.find('td').eq(2).text()
-                // city: text.find('td').eq(0).text()
               })
             };
         });
