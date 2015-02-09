@@ -5,6 +5,8 @@ var request = require('request'),
 const URL = 'http://src.tccc.com.br/PontosDeRecarga.htm';
 
 app.get('/', function(req, res) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
   request(URL, function (err, resp, body) {
     if (!err) {
         var $ = cheerio.load(body);
@@ -16,10 +18,10 @@ app.get('/', function(req, res) {
             // the content init in line 2
             if (i > 1) {
               info.push({
-                address: text.find('td').eq(3).text(),
-                district: text.find('td').eq(1).text(),
-                local: text.find('td').eq(2).text(),
-                city: text.find('td').eq(0).text()
+                address: text.find('td').eq(3).text() + ' - ' + text.find('td').eq(1).text() + ' - ' + text.find('td').eq(0).text(),
+                // district: text.find('td').eq(1).text(),
+                local: text.find('td').eq(2).text()
+                // city: text.find('td').eq(0).text()
               })
             };
         });
