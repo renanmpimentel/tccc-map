@@ -20,6 +20,7 @@ app.get('/', function(req, res) {
               info.push({
                 address: text.find('td').eq(3).text() + ' - ' + text.find('td').eq(1).text() + ' - ' + text.find('td').eq(0).text(),
                 // district: text.find('td').eq(1).text(),
+                phone: text.find('td').eq(4).text(),
                 local: text.find('td').eq(2).text()
                 // city: text.find('td').eq(0).text()
               })
